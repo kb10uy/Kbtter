@@ -1,0 +1,80 @@
+--------------------------------------------------------------------------------
+Kbtterプラグイン機能仕様書
+C#・IronPython・TweetSharp・WPFがある程度わかる人向けです。
+v1.2
+--------------------------------------------------------------------------------
+
+Kbtterではプラグインが作成・使用できます。
+使用する言語はIronPythonです。
+
+2014/03/08 v1.1 利便性向上の為、クラス名がPluginではなくファイル名基準になりました。
+                また、GetPluginName()でプラグイン名を必ず返すように変更になりました。
+
+2014/03/22 v1.2 IKbtterHasSettingWindowは別に設定画面専用じゃない上にウィンドウすら出す必要
+                もなかったので名前と機能を変更しました。
+
+2014/03/29 v1.3 お気に入り解除された時に発動するIKbtterOnUnfavoriteを追加しました。
+                ネタ要員としてどうぞ。
+
+仕様
+・プラグインは全てpluginフォルダに入れる
+・ファイル名は拡張子".py"以外自由
+・クラス名はそのファイルの拡張子抜きの名前で固定
+・インターフェースの継承で機能を実装
+・Twitterの操作は7割TweetSharp生API
+  (plugin_sample/PluginInterfaces.cs内のTweitterExの関数はTwitterServiceの
+   拡張メソッドとして使えるかもしれません)
+
+作り方
+・IronPythonのお決まりをします。
+
+・KbtterとTweetSharp名前空間をインポートします。
+
+・拡張子抜きのファイル名と同じクラス(piyo.pyならpiyoクラス)を作り、
+　GetPluginName(self)という関数を作り、プラグイン名を返すようにします。
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+　さらに、実装したい機能のインターフェースを実装し、それぞれに対応する関数を記述します。
+	IKbtterOnInitialize
+	OnInitialize	(self,svc,user)	プラグイン読み込み直後に実行。
+					svcはTwitterService、
+					userは自分のTwitterUser。
+
+	IKbtterOnTweet
+	OnTweet		(self,svc,user,stat)	ストリームでツイートが流れてきた時に実行。
+					svcはTwitterService、
+					userは自分のTwitterUser、
+					statは流れてきたTwitterStatus。
+
+	IKbtterOnRetweet
+	OnTweet		(self,svc,user,stat)	リツイートされた時に実行。
+					svcはTwitterService、
+					userはRTした人のTwitterUser、
+					statはRTされたTwitterStatus。
+
+	IKbtterOnFavorite
+	OnTweet		(self,svc,user,stat)	ふぁぼられた時に実行。
+					svcはTwitterService、
+					userはふぁぼってくれたTwitterUser、
+					statはふぁぼられたTwitterStatus。
+
+	IKbtterOnFavorite
+	OnTweet		(self,svc,user,stat)	あんふぁぼられた時に実行。
+					svcはTwitterService、
+					userはあんふぁぼってくれたTwitterUser、
+					statはあんふぁぼられたTwitterStatus。
+
+	IKbtterCallable
+	GetMenuList	(self)			(内部的に)OnInitializeの直後に実行。
+					特に引数はありませんが、
+					プラグインが設定画面を独自で持つ場合に、
+					KbtterPluginMenuクラスの配列を返すことで
+					メニューから呼び出せるようになります。
+					詳しくはplugin_sample/PluginInterfaces.csを御覧ください。
+
+・適当に実装します。
+・pluginフォルダに入れます。
+・起動してエラーがでなければ完成です。
+
+サンプルとしてupdate_nameが入ってます。
+自分に「@hogehoge update_name 新しい名前」みたいなリプが飛んでくると、
+その名前になって改名通知を返信します。

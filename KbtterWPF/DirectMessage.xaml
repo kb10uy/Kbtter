@@ -1,0 +1,52 @@
+﻿<Window x:Class="KbtterWPF.DirectMessage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DM送受信" Height="600" Width="600" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="#55acee">
+            <ToolBarTray Background="Transparent" Margin="2">
+                <ToolBar>
+                    <Button Name="Refresh" Click="Refresh_Click" ToolTip="ユーザー一覧とDMを更新します。空白のユーザーは削除されます。">更新</Button>
+                    <Separator/>
+                    <TextBox Name="NewUserName" Width="90"/>
+                    <Button Name="CreateDM" Click="CreateDM_Click" ToolTip="新しくDMを送信するユーザー名(ScreenName)">新しいDMを作成</Button>
+                </ToolBar>
+            </ToolBarTray>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Name="DMUserList" Grid.Column="0" DockPanel.Dock="Left" SelectionChanged="DMUserList_Selected">
+
+            </ListBox>
+            <GridSplitter Width="4"  Grid.Column="1"  Background="LightGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <DockPanel DockPanel.Dock="Right" Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="150"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Row="0" Name="DMLine" 
+                             HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             ScrollViewer.CanContentScroll="False">
+
+                    </ListBox>
+                    <StackPanel Grid.Row="1" Background="#f5f8fa">
+                        <TextBox Height="120" Name="DMSendText" TextChanged="DMSendText_TextChanged"/>
+                        <DockPanel  HorizontalAlignment="Stretch">
+                            <Label Name="SendTextRest" Content="140"/>
+                            <Button HorizontalAlignment="Right" Content="  送信  " Click="Button_Click"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>

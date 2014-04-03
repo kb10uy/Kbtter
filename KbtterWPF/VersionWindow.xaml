@@ -1,0 +1,22 @@
+﻿<Window x:Class="KbtterWPF.VersionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kbtterについて" Height="320" Width="480" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <StackPanel>
+        <StackPanel>
+            <Label FontSize="36" HorizontalAlignment="Center" Foreground="DarkBlue">Kbtter</Label>
+            <Label FontSize="12" HorizontalAlignment="Center" Name="Version"></Label>
+        </StackPanel>
+        <StackPanel>
+            <Label FontSize="20" HorizontalAlignment="Center">ライセンス</Label>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10" TextAlignment="Center">Kbtterは、Apache License 2.0のライブラリを使用しています。詳しくはLICENSE.txtを参照してください。</TextBlock>
+            <Label HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="http://www.apache.org/licenses/LICENSE-2.0.html" RequestNavigate="Hyperlink_RequestNavigate">Apache License 2.0</Hyperlink>
+            </Label>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10" TextAlignment="Center">Kbtterは、MIT Licenseのライブラリを使用しています。詳しくはLICENSE.txtを参照してください。</TextBlock>
+            <Label HorizontalAlignment="Center">
+                <Hyperlink NavigateUri="http://opensource.org/licenses/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT License</Hyperlink>
+            </Label>
+        </StackPanel>
+    </StackPanel>
+</Window>

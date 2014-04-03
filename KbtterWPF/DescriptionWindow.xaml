@@ -1,0 +1,45 @@
+﻿<Window x:Class="KbtterWPF.Description"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="詳細" Height="400" Width="400" Loaded="Window_Loaded"
+        >
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Background="#f5f8fa">
+            <StackPanel Orientation="Horizontal"  Height="48">
+                <Image Name="UserImage" Margin="5" Height="36" Width="36" VerticalAlignment="Top"/>
+                <TextBlock Name="UserName"  FontSize="24" VerticalAlignment="Center">Loading...</TextBlock>
+            </StackPanel>
+            <TextBox Name="MainText" TextWrapping="Wrap" MinHeight="24"
+                     IsReadOnly="True" />
+            <StackPanel Name="URLText" MinHeight="24"/>
+            <StackPanel Orientation="Horizontal" Height="40">
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="RTCount" VerticalAlignment="Center" FontSize="16" Foreground="DarkBlue">Lodaing</Label>
+                    <Label VerticalAlignment="Center" FontSize="14">リツイート</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Name="FavCount" VerticalAlignment="Center" FontSize="16" Foreground="DarkBlue">Lodaing</Label>
+                    <Label VerticalAlignment="Center" FontSize="14">お気に入り</Label>
+                </StackPanel>
+                <Button Name="ButtonShowReply" Click="ButtonShowReply_Click" IsEnabled="False">
+                    <Button.Content>
+                        <TextBlock TextAlignment="Center">
+                            返信先<LineBreak/>ツイート
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <StackPanel Name="MentionTreeArea">
+
+            </StackPanel>
+        </StackPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="32"/>
+            </Grid.RowDefinitions>
+            <TextBox Name="ReplyText" AcceptsReturn="True" TextWrapping="WrapWithOverflow" Grid.Row="0"></TextBox>
+            <Button Name="ReplyButton" Click="ReplyButton_Click" Grid.Row="1">返信</Button>
+        </Grid>
+    </DockPanel>
+</Window>

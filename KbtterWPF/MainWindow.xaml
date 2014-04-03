@@ -1,0 +1,271 @@
+﻿<Window x:Class="KbtterWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kbtter" Height="720" Width="680" Closed="Window_Closed"
+        Margin="4" Background="#e1e8ed" StateChanged="Window_StateChanged"
+        >
+    <Window.Resources>
+
+        <ContextMenu Name="M_Main" x:Key="CTX_Main">
+
+        </ContextMenu>
+
+        <ControlTemplate x:Key="FlatButton" TargetType="Button">
+            <Border x:Name="mainb" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" Margin="3"/>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightYellow" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="NavajoWhite" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disable">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="DarkGray" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="FlatButtonSystem" TargetType="Button">
+            <Border x:Name="mainb" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" Margin="3"/>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightYellow" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="NavajoWhite" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disable">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="DarkGray" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+        <ControlTemplate x:Key="FlatToggleButton" TargetType="ToggleButton">
+            <Border x:Name="mainb" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" Margin="3"/>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightYellow" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Checked">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="NavajoWhite" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Disable">
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="DarkGray" Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32" CornerRadius="{x:Static SystemParameters.WindowCornerRadius}" 
+                      UseAeroCaptionButtons="False" ResizeBorderThickness="8"
+                      >
+
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+    <Border BorderThickness="1" BorderBrush="DarkGray" Name="RootBorder" Margin="0">
+        <DockPanel  Background="#e1e8ed" >
+            <StackPanel Name="MainPanel" Loaded="MainPanel_Loaded" DockPanel.Dock="Top">
+                <DockPanel Height="32">
+                    <Label FontSize="16" DockPanel.Dock="Left">Kbtter</Label>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Button Content="0" FontFamily="Marlett" Background="#e1e8ed" BorderBrush="Transparent" WindowChrome.IsHitTestVisibleInChrome="True" Width="32" Template="{DynamicResource FlatButtonSystem}" Click="ButtonMini_Click"/>
+                        <Button Content="1" Name="StateChangeButton" FontFamily="Marlett" Background="#e1e8ed" BorderBrush="Transparent" WindowChrome.IsHitTestVisibleInChrome="True" Width="32" Template="{DynamicResource FlatButtonSystem}" Click="ButtonState_Click"/>
+                        <Button Content="r" FontFamily="Marlett" Background="#e1e8ed" BorderBrush="Transparent" WindowChrome.IsHitTestVisibleInChrome="True" Width="32" Template="{DynamicResource FlatButtonSystem}" Click="ButtonClose_Click"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel Background="#55acee" HorizontalAlignment="Stretch" Height="44">
+                    <DockPanel>
+                        <Border BorderThickness="1" CornerRadius="2" Padding="4" BorderBrush="LightGray" Margin="2" DockPanel.Dock="Left">
+                            <DockPanel>
+                                <TextBlock Name="AB_Search" VerticalAlignment="Center" FontSize="16" Margin="2" Text="検索"/>
+                                <TextBox Name="SearchText" Width="128" Background="#f5f8fa" Margin="2" 
+                                     VerticalAlignment="Center" KeyDown="SearchText_KeyDown" ToolTip="検索キーワードを入力"/>
+                            </DockPanel>
+                        </Border>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Border  BorderThickness="1" CornerRadius="2" Padding="4" BorderBrush="LightGray" Margin="2" DockPanel.Dock="Left">
+                                <DockPanel>
+                                    <TextBlock Name="AB_EasyTweet" VerticalAlignment="Center" FontSize="16" Margin="2" Text="簡易ツイート"/>
+                                    <TextBox Name="EasyTweetText" Background="#f5f8fa" Margin="2" 
+                                     VerticalAlignment="Center" KeyDown="EasyTweetText_KeyDown" TextChanged="EasyTweetText_TextChanged"
+                                     ToolTip="ツイート内容を入力"/>
+                                </DockPanel>
+                            </Border>
+                            <Menu Grid.Column="1" Width="36"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent">
+                                <MenuItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                                    <MenuItem.Header>
+                                        <Label FontFamily="Marlett" FontSize="16"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >6</Label>
+                                    </MenuItem.Header>
+                                    <MenuItem Header="ユーザーパネルの情報を自分に戻す" Name="M_View_ResetUserPanel" Click="M_View_ResetUserPanel_Click"/>
+                                    <MenuItem Header="ユーザーパネルの情報を更新" Name="M_View_RefreshUserPanel" Click="TB_RefreshUser_Click"/>
+                                    <MenuItem Header="ダイレクトメッセージ" Name="M_DirectMessage" Click="ShowDMWindow_Click"/>
+                                    <Separator/>
+                                    <MenuItem Header="各パネルのツイートを右端で折り返す(非推奨)" Name="M_View_AllowWrap" Click="M_View_AllowWrap_Click" IsCheckable="True"/>
+                                    <MenuItem Header="設定" Name="M_Setting" Click="M_Setting_Click"/>
+                                    <Separator/>
+                                    <MenuItem Name="MenuPlugin" Header="プラグイン(_P)"></MenuItem>
+                                    <Separator/>
+                                    <MenuItem Header="Kbtterについて" Click="MenuInfo_Click" Name="M_Version_About"/>
+                                    <MenuItem Header="終了" Name="MenuExit" Click="MenuExit_Click"/>
+                                </MenuItem>
+                            </Menu>
+                        </Grid>
+                    </DockPanel>
+                </DockPanel>
+
+
+            </StackPanel>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#f5f8fa">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4"/>
+                    <ColumnDefinition Width="240"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="24"/>
+                </Grid.RowDefinitions>
+                <GridSplitter Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                <!--ツイート欄-->
+                <DockPanel Background="#f5f8fa" Grid.Column="2" Grid.Row="0">
+                    <StackPanel  DockPanel.Dock="Top">
+                        <TextBox Margin="6" Height="120" Name="TextBoxTweet" AcceptsReturn="True" TextChanged="TextBoxTweet_TextChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+                        <TextBlock TextAlignment="Right" Name="TweetRest">140　　</TextBlock>
+                    </StackPanel>
+                    <Border Name="ButtonTweet" CornerRadius="4" BorderThickness="2" BorderBrush="#ffffff" Height="40" Margin="4" MouseLeftButtonDown="Tweet_MouseLeftButtonDown"
+                    DockPanel.Dock="Bottom" Background="#55acee" >
+                        <Label Name="UV_Tweet" Content="ツイート" HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="20"/>
+                    </Border>
+                </DockPanel>
+                <!-- ユーザー欄 -->
+                <DockPanel Grid.Column="2" Grid.Row="1">
+                    <StackPanel DockPanel.Dock="Top">
+                        <StackPanel Orientation="Horizontal" Background="#f5f8fa" Height="48">
+                            <Image Name="UserImage" Margin="5" Height="36" Width="36" VerticalAlignment="Top"/>
+                            <Label Name="UserName"  FontSize="24" VerticalAlignment="Top">Loading...</Label>
+                        </StackPanel>
+                        <StackPanel Background="#f5f8fa" >
+                            <StackPanel Orientation="Horizontal">
+                                <Label Name="UserScreenName">Loading...</Label>
+                                <Label>
+                                    <Hyperlink Name="UserUri" Click="UserUri_Click">Loading..</Hyperlink>
+                                </Label>
+                            </StackPanel>
+                            <TextBlock Name="UserProfile" TextWrapping="Wrap" Margin="2">Loading...</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--詳細-->
+                    <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Background="#f5f8fa" Height="42">
+                                <Label Name="UVTweets" FontSize="18" VerticalAlignment="Center" Width="110">ツイート</Label>
+                                <Label FontSize="22" Foreground="DarkBlue" Name="UserTweets" 
+                                   MouseLeftButtonDown="UserTweets_MouseLeftButtonDown" MouseEnter="UserTweets_MouseEnter"
+                                   MouseLeave="UserTweets_MouseLeave">Loading...</Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Background="#f5f8fa" Height="42">
+                                <Label Name="UVFollowing" FontSize="18" VerticalAlignment="Center" Width="110">フォロー</Label>
+                                <Label FontSize="22" Foreground="DarkBlue" Name="UserFollow"
+                                   MouseLeftButtonDown="UserFollow_MouseLeftButtonDown" MouseEnter="UserFollow_MouseEnter"
+                                   MouseLeave="UserFollow_MouseLeave">Loading...</Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Background="#f5f8fa" Height="42">
+                                <Label Name="UVFollowed" FontSize="18" VerticalAlignment="Center" Width="110">フォロワー</Label>
+                                <Label FontSize="22" Foreground="DarkBlue" Name="UserFollower"
+                                   MouseLeftButtonDown="UserFollower_MouseLeftButtonDown" MouseEnter="UserFollower_MouseEnter"
+                                   MouseLeave="UserFollower_MouseLeave">Loading...</Label>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Background="#f5f8fa" Height="42">
+                                <Label Name="UVFavorites" FontSize="18" VerticalAlignment="Center" Width="110">お気に入り</Label>
+                                <Label FontSize="22" Foreground="DarkBlue" Name="UserFavorites"
+                                   MouseLeftButtonDown="UserFavorites_MouseLeftButtonDown" MouseEnter="UserFavorites_MouseEnter"
+                                   MouseLeave="UserFavorites_MouseLeave">Loading...</Label>
+                            </StackPanel>
+                            <StackPanel Name="UserStatePanel" Background="LightGray">
+                                <TextBlock Name="UserState" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center">ユーザーとの状態</TextBlock>
+                            </StackPanel>
+                            <StackPanel>
+                                <Border Name="FollowButton" MouseLeftButtonDown="FollowButton_MouseLeftButtonDown" Background="LightBlue" BorderThickness="2" BorderBrush="White" CornerRadius="2">
+                                    <TextBlock Name="FollowState" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">フォローする</TextBlock>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel>
+                                <Expander Header="ユーザーメニュー" Padding="2" IsExpanded="False">
+                                    <StackPanel>
+                                        <Button Name="UserListButton" Template="{DynamicResource FlatButton}" Content="リスト追加・削除" Background="LightBlue" Click="UserListButton_Click"/>
+                                        <Button Name="UserSpamButton" Template="{DynamicResource FlatButton}" Content="スパム報告" Background="Blue"  Click="UserSpamButton_Click"/>
+                                        <Button Name="UserBlockButton" Template="{DynamicResource FlatButton}" Content="ブロック" Background="Red"  Click="UserBlockButton_Click"/>
+                                    </StackPanel>
+                                </Expander>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+                <TabControl Grid.Column="0" Grid.RowSpan="2">
+                    <TabItem Name="MT_Timeline" Header="ホームタイムライン">
+                        <!--  -->
+                        <ListBox Name="MainTimeline" 
+                                 ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch"></ListBox>
+                    </TabItem>
+                    <TabItem Name="MT_Mention" Header="メンション">
+                        <ListBox Name="MainMention" HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="False"></ListBox>
+                    </TabItem>
+                    <TabItem Name="TweetsTab" Header="ツイート">
+                        <ListBox Name="TweetsList" HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="False"></ListBox>
+                    </TabItem>
+                    <TabItem Name="MT_Users" Header="ユーザー">
+                        <ListBox Name="UsersList" HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="False"></ListBox>
+                    </TabItem>
+                    <TabItem Name="SearchTab" Header="検索結果">
+                        <ListBox Name="SearchResult" HorizontalContentAlignment="Stretch"
+                                 ScrollViewer.CanContentScroll="False"></ListBox>
+                    </TabItem>
+                </TabControl>
+                <StatusBar Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2">
+                    <StatusBarItem Name="TwitterState"></StatusBarItem>
+                    <StatusBarItem FontFamily="Marlett" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{x:Static SystemColors.ScrollBarBrush}">o</StatusBarItem>
+                </StatusBar>
+            </Grid>
+        </DockPanel>
+    </Border>
+</Window>

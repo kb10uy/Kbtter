@@ -76,9 +76,11 @@
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
-    <Reference Include="Hammock">
-      <HintPath>..\packages\Hammock.1.3.1\lib\4.0\Hammock.dll</HintPath>
+    <Reference Include="Hammock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\TweetSharp-Unofficial.2.3.1.2\lib\4.0\Hammock.dll</HintPath>
     </Reference>
     <Reference Include="IronPython">
       <HintPath>..\packages\IronPython.2.7.4\lib\Net45\IronPython.dll</HintPath>
@@ -151,15 +153,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AccountSelect.xaml.cs">
+      <DependentUpon>AccountSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DescriptionWindow.xaml.cs">
       <DependentUpon>DescriptionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DirectMessage.xaml.cs">
       <DependentUpon>DirectMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DropDownButton.cs" />
+    <Compile Include="ExListWindow.xaml.cs">
+      <DependentUpon>ExListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ListWindow.xaml.cs">
       <DependentUpon>ListWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow.Creators.cs" />
+    <Compile Include="MainWindow.Logic.cs" />
     <Compile Include="PluginInterfaces.cs" />
     <Compile Include="SettingWindow.xaml.cs">
       <DependentUpon>SettingWindow.xaml</DependentUpon>
@@ -167,18 +178,29 @@
     <Compile Include="AuthorizeWindow.xaml.cs">
       <DependentUpon>AuthorizeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TegakiDrawWindow.xaml.cs">
+      <DependentUpon>TegakiDrawWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VersionWindow.xaml.cs">
       <DependentUpon>VersionWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AccountSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DescriptionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DictionaryFlatButton.xaml">
+    <Page Include="DirectMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DirectMessage.xaml">
+    <Page Include="ExListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AuthorizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TegakiDrawWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,12 +271,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TweetSharp-myBuild\src\TweetSharp\TweetSharp.csproj">
-      <Project>{10bfaa13-b836-4b37-b2d3-d4feb3f3c484}</Project>
-      <Name>TweetSharp</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 および x64%29</ProductName>
@@ -268,12 +288,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="trayicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Cache\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Cache\" />
+    <ProjectReference Include="..\..\TweetSharp-myBuild\src\TweetSharp\TweetSharp.csproj">
+      <Project>{10bfaa13-b836-4b37-b2d3-d4feb3f3c484}</Project>
+      <Name>TweetSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

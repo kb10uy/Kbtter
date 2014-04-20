@@ -1,98 +1,23 @@
 ﻿<Window x:Class="KbtterWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:kbtter="clr-namespace:KbtterWPF"
+        xmlns:l="clr-namespace:WpfDwopDownMenuButton"
         Title="Kbtter" Height="720" Width="680" Closed="Window_Closed"
         Margin="4" Background="#e1e8ed" StateChanged="Window_StateChanged"
         >
     <Window.Resources>
-
-        <ContextMenu Name="M_Main" x:Key="CTX_Main">
-
-        </ContextMenu>
-
-        <ControlTemplate x:Key="FlatButton" TargetType="Button">
-            <Border x:Name="mainb" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
-                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" Margin="3"/>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal"/>
-                        <VisualState x:Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightYellow" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Pressed">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="NavajoWhite" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Disable">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="DarkGray" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Border>
-        </ControlTemplate>
-        <ControlTemplate x:Key="FlatButtonSystem" TargetType="Button">
-            <Border x:Name="mainb" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
-                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" Margin="3"/>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal"/>
-                        <VisualState x:Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightYellow" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Pressed">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="NavajoWhite" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Disable">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="DarkGray" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Border>
-        </ControlTemplate>
-        <ControlTemplate x:Key="FlatToggleButton" TargetType="ToggleButton">
-            <Border x:Name="mainb" BorderThickness="1" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
-                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}" Margin="3"/>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal"/>
-                        <VisualState x:Name="MouseOver">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="LightYellow" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Checked">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="NavajoWhite" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Disable">
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="mainb" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="DarkGray" Duration="0"/>
-                            </Storyboard>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Border>
-        </ControlTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="CustomControls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="32" CornerRadius="{x:Static SystemParameters.WindowCornerRadius}" 
-                      UseAeroCaptionButtons="False" ResizeBorderThickness="8"
-                      >
-
-        </WindowChrome>
+                      UseAeroCaptionButtons="False" ResizeBorderThickness="8"/>
     </WindowChrome.WindowChrome>
+
     <Border BorderThickness="1" BorderBrush="DarkGray" Name="RootBorder" Margin="0">
         <DockPanel  Background="#e1e8ed" >
             <StackPanel Name="MainPanel" Loaded="MainPanel_Loaded" DockPanel.Dock="Top">
@@ -105,51 +30,55 @@
                     </StackPanel>
                 </DockPanel>
 
-                <DockPanel Background="#55acee" HorizontalAlignment="Stretch" Height="44">
-                    <DockPanel>
-                        <Border BorderThickness="1" CornerRadius="2" Padding="4" BorderBrush="LightGray" Margin="2" DockPanel.Dock="Left">
-                            <DockPanel>
-                                <TextBlock Name="AB_Search" VerticalAlignment="Center" FontSize="16" Margin="2" Text="検索"/>
-                                <TextBox Name="SearchText" Width="128" Background="#f5f8fa" Margin="2" 
+                <Grid Background="#55acee" HorizontalAlignment="Stretch" Height="44">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderThickness="1" CornerRadius="2" Padding="4" BorderBrush="LightGray" Margin="2" Grid.Column="0">
+                        <DockPanel>
+                            <TextBlock Name="AB_Search" VerticalAlignment="Center" FontSize="16" Margin="2" Text="検索"/>
+                            <TextBox Name="SearchText"  Background="#f5f8fa" Margin="2" 
                                      VerticalAlignment="Center" KeyDown="SearchText_KeyDown" ToolTip="検索キーワードを入力"/>
-                            </DockPanel>
-                        </Border>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="36"/>
-                            </Grid.ColumnDefinitions>
-                            <Border  BorderThickness="1" CornerRadius="2" Padding="4" BorderBrush="LightGray" Margin="2" DockPanel.Dock="Left">
-                                <DockPanel>
-                                    <TextBlock Name="AB_EasyTweet" VerticalAlignment="Center" FontSize="16" Margin="2" Text="簡易ツイート"/>
-                                    <TextBox Name="EasyTweetText" Background="#f5f8fa" Margin="2" 
+                        </DockPanel>
+                    </Border>
+                    <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#55aaee"/>
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="36"/>
+                        </Grid.ColumnDefinitions>
+                        <Border  BorderThickness="1" CornerRadius="2" Padding="4" BorderBrush="LightGray" Margin="2" DockPanel.Dock="Left">
+                            <DockPanel>
+                                <TextBlock Name="AB_EasyTweet" VerticalAlignment="Center" FontSize="16" Margin="2" Text="簡易ツイート"/>
+                                <TextBox Name="EasyTweetText" Background="#f5f8fa" Margin="2" 
                                      VerticalAlignment="Center" KeyDown="EasyTweetText_KeyDown" TextChanged="EasyTweetText_TextChanged"
                                      ToolTip="ツイート内容を入力"/>
-                                </DockPanel>
-                            </Border>
-                            <Menu Grid.Column="1" Width="36"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent">
-                                <MenuItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                                    <MenuItem.Header>
-                                        <Label FontFamily="Marlett" FontSize="16"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >6</Label>
-                                    </MenuItem.Header>
-                                    <MenuItem Header="ユーザーパネルの情報を自分に戻す" Name="M_View_ResetUserPanel" Click="M_View_ResetUserPanel_Click"/>
-                                    <MenuItem Header="ユーザーパネルの情報を更新" Name="M_View_RefreshUserPanel" Click="TB_RefreshUser_Click"/>
-                                    <MenuItem Header="ダイレクトメッセージ" Name="M_DirectMessage" Click="ShowDMWindow_Click"/>
-                                    <Separator/>
-                                    <MenuItem Header="各パネルのツイートを右端で折り返す(非推奨)" Name="M_View_AllowWrap" Click="M_View_AllowWrap_Click" IsCheckable="True"/>
-                                    <MenuItem Header="設定" Name="M_Setting" Click="M_Setting_Click"/>
-                                    <Separator/>
-                                    <MenuItem Name="MenuPlugin" Header="プラグイン(_P)"></MenuItem>
-                                    <Separator/>
-                                    <MenuItem Header="Kbtterについて" Click="MenuInfo_Click" Name="M_Version_About"/>
-                                    <MenuItem Header="終了" Name="MenuExit" Click="MenuExit_Click"/>
-                                </MenuItem>
-                            </Menu>
-                        </Grid>
-                    </DockPanel>
-                </DockPanel>
+                            </DockPanel>
+                        </Border>
+                        <Menu Grid.Column="1" Width="36"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent">
+                            <MenuItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                                <MenuItem.Header>
+                                    <Label FontFamily="Marlett" FontSize="16"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >6</Label>
+                                </MenuItem.Header>
+                                <MenuItem Header="ユーザーパネルの情報を自分に戻す" Name="M_View_ResetUserPanel" Click="M_View_ResetUserPanel_Click"/>
+                                <MenuItem Header="ユーザーパネルの情報を更新" Name="M_View_RefreshUserPanel" Click="TB_RefreshUser_Click"/>
+                                <MenuItem Header="各パネルのツイートを右端で折り返す(非推奨)" Name="M_View_AllowWrap" Click="M_View_AllowWrap_Click" IsCheckable="True"/>
+                                <Separator/>
+                                <MenuItem Header="リスト" Name="M_Lists" Click="M_Lists_Click"/>
+                                <MenuItem Header="ダイレクトメッセージ" Name="M_DirectMessage" Click="ShowDMWindow_Click"/>
+                                <MenuItem Name="MenuPlugin" Header="プラグイン"></MenuItem>
+                                <Separator/>
+                                <MenuItem Header="アカウント選択(再起動)" Name="M_Reboot" Click="M_Reboot_Click"/>
+                                <MenuItem Header="設定" Name="M_Setting" Click="M_Setting_Click"/>
+                                <MenuItem Header="Kbtterについて" Click="MenuInfo_Click" Name="M_Version_About"/>
+                                <MenuItem Header="終了" Name="MenuExit" Click="MenuExit_Click"/>
+                            </MenuItem>
+                        </Menu>
+                    </Grid>
 
-
+                </Grid>
             </StackPanel>
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#f5f8fa">
                 <Grid.ColumnDefinitions>
@@ -158,24 +87,52 @@
                     <ColumnDefinition Width="240"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="240"/>
+                    <RowDefinition Height="4"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="24"/>
                 </Grid.RowDefinitions>
-                <GridSplitter Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                <GridSplitter Grid.Column="1" Grid.RowSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 <!--ツイート欄-->
-                <DockPanel Background="#f5f8fa" Grid.Column="2" Grid.Row="0">
-                    <StackPanel  DockPanel.Dock="Top">
-                        <TextBox Margin="6" Height="120" Name="TextBoxTweet" AcceptsReturn="True" TextChanged="TextBoxTweet_TextChanged" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
-                        <TextBlock TextAlignment="Right" Name="TweetRest">140　　</TextBlock>
+                <Grid Background="#f5f8fa" Grid.Column="2" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="48"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox  Grid.Row="0" Margin="6" Name="TextBoxTweet" AcceptsReturn="True" TextChanged="TextBoxTweet_TextChanged" 
+                                 VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" KeyDown="TextBoxTweet_KeyDown"/>
+                    <!--画像用-->
+                    <StackPanel Grid.Row="1">
+                        <StackPanel Name="IncludeImageList">
+
+                        </StackPanel>
+                        
+                        <l:DropDownMenuButton Margin="6">
+                            <l:DropDownMenuButton.DropDownContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Name="AI_Load" Header="既存の画像" Click="AI_Load_Click"/>
+                                    <MenuItem Name="AI_Draw" Header="絵を描く" Click="AI_Draw_Click"/>
+                                </ContextMenu>
+                            </l:DropDownMenuButton.DropDownContextMenu>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center">画像を追加</TextBlock>
+                                <TextBlock FontFamily="Marlett" VerticalAlignment="Center" FontSize="16">6</TextBlock>
+                            </StackPanel>
+                        </l:DropDownMenuButton>
+                        
                     </StackPanel>
-                    <Border Name="ButtonTweet" CornerRadius="4" BorderThickness="2" BorderBrush="#ffffff" Height="40" Margin="4" MouseLeftButtonDown="Tweet_MouseLeftButtonDown"
+                    <TextBlock Grid.Row="2" TextAlignment="Right" Name="TweetRest">140　　</TextBlock>
+                    <Border Name="ButtonTweet" Grid.Row="3" CornerRadius="4" BorderThickness="2" BorderBrush="#ffffff" Margin="4" MouseLeftButtonDown="Tweet_MouseLeftButtonDown"
                     DockPanel.Dock="Bottom" Background="#55acee" >
                         <Label Name="UV_Tweet" Content="ツイート" HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="20"/>
                     </Border>
-                </DockPanel>
+                </Grid>
+                <GridSplitter Grid.Column="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 <!-- ユーザー欄 -->
-                <DockPanel Grid.Column="2" Grid.Row="1">
+                <DockPanel Grid.Column="2" Grid.Row="2">
                     <StackPanel DockPanel.Dock="Top">
                         <StackPanel Orientation="Horizontal" Background="#f5f8fa" Height="48">
                             <Image Name="UserImage" Margin="5" Height="36" Width="36" VerticalAlignment="Top"/>
@@ -238,30 +195,21 @@
                         </StackPanel>
                     </ScrollViewer>
                 </DockPanel>
-                <TabControl Grid.Column="0" Grid.RowSpan="2">
+                <TabControl Name="MainTab" Grid.Column="0" Grid.RowSpan="3" SelectionChanged="MainTab_SelectionChanged">
                     <TabItem Name="MT_Timeline" Header="ホームタイムライン">
-                        <!--  -->
+
                         <ListBox Name="MainTimeline" 
-                                 ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch"></ListBox>
+                                 ScrollViewer.CanContentScroll="False" HorizontalContentAlignment="Stretch"
+                                 KeyDown="MainTimeline_KeyDown">
+                        </ListBox>
                     </TabItem>
                     <TabItem Name="MT_Mention" Header="メンション">
                         <ListBox Name="MainMention" HorizontalContentAlignment="Stretch"
                                  ScrollViewer.CanContentScroll="False"></ListBox>
                     </TabItem>
-                    <TabItem Name="TweetsTab" Header="ツイート">
-                        <ListBox Name="TweetsList" HorizontalContentAlignment="Stretch"
-                                 ScrollViewer.CanContentScroll="False"></ListBox>
-                    </TabItem>
-                    <TabItem Name="MT_Users" Header="ユーザー">
-                        <ListBox Name="UsersList" HorizontalContentAlignment="Stretch"
-                                 ScrollViewer.CanContentScroll="False"></ListBox>
-                    </TabItem>
-                    <TabItem Name="SearchTab" Header="検索結果">
-                        <ListBox Name="SearchResult" HorizontalContentAlignment="Stretch"
-                                 ScrollViewer.CanContentScroll="False"></ListBox>
-                    </TabItem>
+
                 </TabControl>
-                <StatusBar Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2">
+                <StatusBar Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3">
                     <StatusBarItem Name="TwitterState"></StatusBarItem>
                     <StatusBarItem FontFamily="Marlett" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{x:Static SystemColors.ScrollBarBrush}">o</StatusBarItem>
                 </StatusBar>

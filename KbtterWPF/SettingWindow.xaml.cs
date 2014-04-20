@@ -42,6 +42,7 @@ namespace KbtterWPF
                 cfg["Kbtter.General.UserFollowersShow"] = int.Parse(TB_UserFed.Text);
                 cfg["Kbtter.General.UserFavoritesMax"] = int.Parse(TB_UserFavs.Text);
                 cfg["Kbtter.General.SearchCount"] = int.Parse(TB_Preload.Text);
+                cfg["Kbtter.General.ProtectedText"] = TB_ProtectedText.Text;
 
                 cfg["Kbtter.Environment.MessageFile"] = TB_Lang.Text;
 
@@ -50,6 +51,7 @@ namespace KbtterWPF
                 cfg["Kbtter.Notifycation.FavoritedSound"] = TB_NotifyFav.Text;
                 cfg["Kbtter.Notifycation.UnfavoritedSound"] = TB_NotifyUnfav.Text;
                 cfg["Kbtter.Notifycation.DMReceivedSound"] = TB_NotifyDM.Text;
+                
                 cfg.SaveFile("Kbtter.cfg");
             }
             catch (Exception ex)
@@ -77,6 +79,7 @@ namespace KbtterWPF
             TB_UserFed.Text = cfg["Kbtter.General.UserFollowersShow"].NumberValue.ToString();
             TB_UserFavs.Text = cfg["Kbtter.General.UserFavoritesMax"].NumberValue.ToString();
             TB_Search.Text = cfg["Kbtter.General.SearchCount"].NumberValue.ToString();
+            TB_ProtectedText.Text = cfg["Kbtter.General.ProtectedText"].StringValue;
 
             TB_Lang.Text = cfg["Kbtter.Environment.MessageFile"].StringValue;
 
@@ -86,6 +89,32 @@ namespace KbtterWPF
             TB_NotifyUnfav.Text = cfg["Kbtter.Notifycation.UnfavoritedSound"].StringValue;
             TB_NotifyDM.Text = cfg["Kbtter.Notifycation.DMReceivedSound"].StringValue;
 
+            ListPlugins();
+
+        }
+
+        public void ListPlugins()
+        {
+            foreach (var i in main.InitializePlugins)
+            {
+                OnInitList.Items.Add(i.GetPluginName());
+            }
+            foreach (var i in main.TweetPlugins)
+            {
+                OnTweetList.Items.Add(i.GetPluginName());
+            }
+            foreach (var i in main.FavoritePlugins)
+            {
+                OnFavList.Items.Add(i.GetPluginName());
+            }
+            foreach (var i in main.UnfavoritePlugins)
+            {
+                OnUnfavList.Items.Add(i.GetPluginName());
+            }
+            foreach (var i in main.RetweetPlugins)
+            {
+                OnRTList.Items.Add(i.GetPluginName());
+            }
         }
     }
 }

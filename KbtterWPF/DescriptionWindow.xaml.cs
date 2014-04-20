@@ -55,14 +55,15 @@ namespace KbtterWPF
         {
             if (isrepd)
             {
-                SetInfo(os);
+                this.Dispatch(() => SetInfo(os));
+
             }
             else
             {
                 w.Service.GetTweet(new GetTweetOptions { Id = os.Id, IncludeEntities = true }, (s, r) =>
                 {
                     if (s == null) return;
-                    SetInfo(s);
+                    this.Dispatch(() => SetInfo(s));
                 });
             }
 
@@ -106,15 +107,39 @@ namespace KbtterWPF
                 h.NavigateUri = new Uri(u.ExpandedValue);
                 h.RequestNavigate += h_RequestNavigate;
                 h.Inlines.Add(u.DisplayUrl);
+                Label l = new Label { Content = h };
                 URLText.Dispatch(() =>
                 {
                     h.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        URLText.Children.Add(new Label { Content = h });
+                        URLText.Children.Add(l);
+                    }));
+                });
+
+            }
+            foreach (var u in s.Entities.Media)
+            {
+                Hyperlink h = new Hyperlink();
+                h.NavigateUri = new Uri(u.ExpandedUrl);
+                h.RequestNavigate += h_RequestNavigate;
+                h.Inlines.Add(u.DisplayUrl);
+                Label l = new Label { Content = h };
+                URLText.Dispatch(() =>
+                {
+                    h.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        URLText.Children.Add(l);
                     }));
                 });
             }
-            ReplyText.Dispatch(() => ReplyText.Text = "@" + s.User.ScreenName + " ");
+            ReplyText.Dispatch(() =>
+            {
+                ReplyText.Text = "@" + s.User.ScreenName + " ";
+                foreach (var m in s.Entities.Mentions)
+                {
+                    ReplyText.Text += "@" + m.ScreenName + " ";
+                }
+            });
             //rawsourceから自前でふぁぼカウントとる
             FavCount.Dispatch(() => FavCount.Content = raw.favorite_count);
             RTCount.Dispatch(() => RTCount.Content = s.RetweetCount);
@@ -128,6 +153,21 @@ namespace KbtterWPF
         private void ButtonShowReply_Click(object sender, RoutedEventArgs e)
         {
             new Description(w, (long)os.InReplyToStatusId).ShowDialog();
+        }
+
+        private void ReplyText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                w.Service.SendTweet(new SendTweetOptions { Status = ReplyText.Text, InReplyToStatusId = os.Id }, (sts, res) => { });
+                Close();
+            }
+        }
+
+        private void ReplyTegaki_Click(object sender, RoutedEventArgs e)
+        {
+            new TegakiDrawWindow(w, DateTime.Now, os).ShowDialog();
+            Close();
         }
 
     }

@@ -1,0 +1,28 @@
+﻿<Window x:Class="KbtterWPF.AccountSelect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kbtter アカウント選択" Height="300" Width="500" 
+        Background="#f5f8fa" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListBox Name="AccountList" Grid.RowSpan="2" Margin="8" MouseDoubleClick="AccountList_MouseDoubleClick" KeyDown="AccountList_KeyDown"></ListBox>
+        <StackPanel Grid.Column="1" Margin="8">
+            <TextBlock FontSize="24">アカウント選択</TextBlock>
+            <TextBlock FontSize="12">使用したいアカウントを選択して、<LineBreak/>
+                                     OKを押してください。</TextBlock>
+            <TextBlock>新しいアカウントを登録する場合は、下<LineBreak/>
+                       のボックスに好きな名前を入れて登録を<LineBreak/>
+                       クリックしてください。</TextBlock>
+            <TextBox Name="NewAcName" Margin="4"/>
+            <Button Name="NewAcRegist" Click="NewAcRegist_Click" Content="登録" Height="32" Margin="4"/>
+        </StackPanel>
+        <Button Grid.Column="1" Grid.Row="1" Name="Start" Content="OK" Margin="8" Click="Start_Click"/>
+    </Grid>
+</Window>

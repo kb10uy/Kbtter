@@ -1,0 +1,81 @@
+﻿<Window x:Class="KbtterWPF.ExListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="リスト" Height="450" Width="360" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem Header="自分のリスト">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Expander Header="リストの追加" Name="NewListExp"  Grid.Row="0" Background="LightCyan">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" HorizontalAlignment="Right">名前</Label>
+                            <TextBox Margin="2" Grid.Column="2" Grid.Row="0" Name="NListName"/>
+                            <Label Grid.Row="2" HorizontalAlignment="Right">説明</Label>
+                            <TextBox Margin="2" Grid.Column="2" Grid.Row="2" Name="NListDescription"/>
+                            <Label Grid.Row="4" HorizontalAlignment="Right">オプション</Label>
+                            <CheckBox Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" Name="NListPrivate">非公開にする</CheckBox>
+                            <Button Grid.Column="2" Grid.Row="5" Name="NListCreate" Click="NListCreate_Click" Margin="2">追加</Button>
+                        </Grid>
+                    </Expander>
+                    <Expander Grid.Row="1" Header="リストの設定" Background="AliceBlue">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" HorizontalAlignment="Right">名前</Label>
+                            <TextBox Margin="2" Grid.Column="2" Grid.Row="0" Name="ListName"/>
+                            <Label Grid.Row="2" HorizontalAlignment="Right">説明</Label>
+                            <TextBox Margin="2" Grid.Column="2" Grid.Row="2" Name="ListDescription"/>
+                            <Label Grid.Row="4" HorizontalAlignment="Right">オプション</Label>
+                            <CheckBox Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" Name="ListPrivate">非公開にする</CheckBox>
+                            <Button Grid.Column="2" Grid.Row="5" Name="ListUpdate" Click="ListUpdate_Click" Margin="2">更新</Button>
+                        </Grid>
+                    </Expander>
+                    <Expander Grid.Row="2" Header="リストの削除" Background="LightPink">
+                        <StackPanel Margin="4" >
+                            <Button Content="選択中のリストを削除" Click="Button_Click"/>
+                        </StackPanel>
+                    </Expander>
+                    
+                    <ListBox Grid.Row="3" Name="MyListsList" SelectionChanged="MyListsList_SelectionChanged" ScrollViewer.CanContentScroll="False"></ListBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="自分が追加されているリスト">
+                <ListBox Name="AddedMeList" ScrollViewer.CanContentScroll="False"></ListBox>
+            </TabItem>
+        </TabControl>
+        
+    </Grid>
+</Window>

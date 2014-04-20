@@ -10,7 +10,7 @@
             <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
         <TabControl Height="362" Grid.Row="0">
-            <TabItem Header="全般">
+            <TabItem Header="全般1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
@@ -21,7 +21,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
-                        
+
                         <RowDefinition Height="3*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="3*"/>
@@ -42,7 +42,7 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="起動時に読み込むツイート数"/>
                     <TextBox Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" Name="TB_Preload"/>
-                    
+
                     <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="タイムラインの最大表示件数"/>
                     <TextBox Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" Name="TB_MaxTweet"/>
 
@@ -60,9 +60,44 @@
 
                     <Label Grid.Column="1" Grid.Row="13" VerticalAlignment="Center" Content="ユーザーパネルで一度に表示するフォロワー数"/>
                     <TextBox Grid.Column="3" Grid.Row="13" VerticalAlignment="Center" Name="TB_UserFed"/>
-                    
+
                     <Label Grid.Column="1" Grid.Row="15" VerticalAlignment="Center" Content="検索結果で表示する件数"/>
                     <TextBox Grid.Column="3" Grid.Row="15" VerticalAlignment="Center" Name="TB_Search"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="全般2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="非公開ユーザー・リストに表示する接頭辞"/>
+                    <TextBox Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" Name="TB_ProtectedText"/>
 
                 </Grid>
             </TabItem>
@@ -176,36 +211,68 @@
                 </Grid>
             </TabItem>
             <TabItem Header="プラグイン">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="20"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="20"/>
-                    </Grid.RowDefinitions>
-                </Grid>
+                <TabControl>
+                    <TabItem Header="起動時呼び出し">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Name="OnInitList"/>
+                            <StackPanel Grid.Column="1">
+                                <Button Margin="16" IsEnabled="False">テスト(未実装)</Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="ツイート時呼び出し">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Name="OnTweetList"/>
+                            <StackPanel Grid.Column="1">
+                                <Button Margin="16" IsEnabled="False">テスト(未実装)</Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="お気に入り登録時呼び出し">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Name="OnFavList"/>
+                            <StackPanel Grid.Column="1">
+                                <Button Margin="16" IsEnabled="False">テスト(未実装)</Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="お気に入り削除呼び出し">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Name="OnUnfavList"/>
+                            <StackPanel Grid.Column="1">
+                                <Button Margin="16" IsEnabled="False">テスト(未実装)</Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="リツイート時呼び出し">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox Name="OnRTList"/>
+                            <StackPanel Grid.Column="1">
+                                <Button Margin="16" IsEnabled="False">テスト(未実装)</Button>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </TabItem>
         </TabControl>
         <StackPanel Height="36" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
@@ -213,7 +280,7 @@
             <Button Name="ButtonCancel" Content=" キャンセル "  Margin="4" Click="ButtonCancel_Click"/>
         </StackPanel>
         <StatusBar Height="24" Grid.Row="2">
-            
+
         </StatusBar>
     </Grid>
 </Window>

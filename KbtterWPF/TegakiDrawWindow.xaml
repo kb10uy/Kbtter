@@ -1,0 +1,80 @@
+﻿<Window x:Class="KbtterWPF.TegakiDrawWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TEGAKI Draw And Tweet for Kbtter" Height="640" Width="800" ResizeMode="NoResize">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Name="CDCanvasWidth" Width="640"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="CDCanvasHeight"  Height="480"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <InkCanvas Name="MainCanvas"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="64"/>
+                <RowDefinition Height="64"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Name="AllClear" Margin="4" Click="AllClear_Click">全消し</Button>
+            <StackPanel Grid.Row="1">
+                <TextBlock Margin="4">ペンの太さ</TextBlock>
+                <Slider Maximum="16" Minimum="1" Name="PenThickness" ValueChanged="PenThickness_ValueChanged" Margin="4" TickPlacement="BottomRight"></Slider>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <TextBlock Margin="4">ペンの色</TextBlock>
+                <Border BorderThickness="1" CornerRadius="2" BorderBrush="Black" Margin="4" Height="28">
+                    <Rectangle Fill="Black" Name="ColorRect" MouseDown="ColorRect_MouseDown"/>
+                </Border>
+            </StackPanel>
+            <GroupBox Header="ペンモード" Grid.Row="3" Margin="4">
+                <StackPanel>
+                <RadioButton IsChecked="True" Name="PenPen" Margin="2" Checked="PenPen_Checked">ペン</RadioButton>
+                <RadioButton Name="PenEraser" Margin="2" Checked="PenEraser_Checked">消しゴム</RadioButton>
+                <RadioButton Name="PenEraserSt" Margin="2" Checked="PenEraserSt_Checked">消しゴム(線単位)</RadioButton>
+                </StackPanel>
+            </GroupBox>
+            <Button Name="Undo" Click="Undo_Click" Grid.Row="4" Margin="4">アンドゥ</Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <CheckBox IsChecked="True" Name="AddHash" VerticalAlignment="Center" Margin="4" Grid.Column="0" Grid.Row="0">
+                <CheckBox.Content>
+                    <TextBlock>ハッシュタグの付加(#tdt_kbtter)</TextBlock>
+                </CheckBox.Content>
+            </CheckBox>
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <CheckBox Name="IsReply" Margin="4">返信先ツイートIDを指定する</CheckBox>
+                <TextBox Name="ReplyID" Margin="4"></TextBox>
+            </StackPanel>
+            <TextBlock Grid.Column="1" VerticalAlignment="Bottom" Margin="4">ツイートの先頭に追加する文章</TextBlock>
+            <TextBox Name="TweetDesc" AcceptsReturn="True" Margin="4" Grid.Column="1" Grid.Row="1"/>
+            <StackPanel Grid.Column="2" Margin="4">
+                <TextBlock>現在の絵のファイル名</TextBlock>
+                <TextBlock>(tegakiフォルダに保存されます)</TextBlock>
+                <TextBlock Foreground="DarkBlue" Name="ImageFileName">None.png</TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button Name="SendButton" Margin="4" Height="52" Click="SendButton_Click">ツイート</Button>
+            <Button Name="CancelButton" Margin="4" Height="52" Click="CancelButton_Click">キャンセル</Button>
+        </StackPanel>
+    </Grid>
+
+</Window>

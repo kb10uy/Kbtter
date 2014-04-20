@@ -11,7 +11,9 @@
             </StackPanel>
             <TextBox Name="MainText" TextWrapping="Wrap" MinHeight="24"
                      IsReadOnly="True" />
-            <StackPanel Name="URLText" MinHeight="24"/>
+            <StackPanel Name="URLText">
+               
+            </StackPanel>
             <StackPanel Orientation="Horizontal" Height="40">
                 <StackPanel Orientation="Horizontal">
                     <Label Name="RTCount" VerticalAlignment="Center" FontSize="16" Foreground="DarkBlue">Lodaing</Label>
@@ -38,8 +40,11 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="32"/>
             </Grid.RowDefinitions>
-            <TextBox Name="ReplyText" AcceptsReturn="True" TextWrapping="WrapWithOverflow" Grid.Row="0"></TextBox>
-            <Button Name="ReplyButton" Click="ReplyButton_Click" Grid.Row="1">返信</Button>
+            <TextBox Name="ReplyText" AcceptsReturn="True" TextWrapping="WrapWithOverflow" Grid.Row="0" KeyDown="ReplyText_KeyDown"/>
+            <DockPanel Grid.Row="1">
+                <Button Name="ReplyButton" Click="ReplyButton_Click" Width="240" DockPanel.Dock="Left">返信</Button>
+                <Button Name="ReplyTegaki" Click="ReplyTegaki_Click" DockPanel.Dock="Right">手描き機能で返信</Button>
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>

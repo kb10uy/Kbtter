@@ -100,7 +100,7 @@ namespace KbtterWPF
             s.Children.Add(ch);
 
             var ti = new TextBlock { FontSize = 20 };
-            ti.Text = (list.Mode == "private" ? "*" : "") + list.Name;
+            ti.Text = (list.Mode == "private" ? main.MessageInfoProtectedText : "") + list.Name;
             ti.TextWrapping = TextWrapping.Wrap;
             var de = new TextBlock { Foreground = Brushes.Gray };
             de.Text = list.Description;
